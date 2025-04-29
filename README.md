@@ -4,7 +4,8 @@
 
 Questa repository raccoglie appunti sul corso di **Statistica e analisi dei dati** dell’Università degli Studi di Milano (UniMi). Include spiegazioni intuitive e grafici interattivi pensati per facilitare la comprensione dei principali concetti trattati.
 
-⚠️ **Nota Bene**:  questi appunti hanno l’obiettivo di fornire una comprensione preliminare degli argomenti e permettere di esplorarli in modo interattivo attraverso script e visualizzazioni.
+> [!CAUTION]
+> questi appunti hanno l’obiettivo di fornire una comprensione preliminare degli argomenti e permettere di esplorarli in modo interattivo attraverso script e visualizzazioni.
 Per un’esposizione più completa e formale degli argomenti trattati, si consiglia la consultazione della seguente repository, dalla quale sono stati presi spunti e riferimenti durante la stesura di questi appunti:  [clicca qui](https://github.com/Favo02-unimi/statistica-e-analisi-dei-dati)
 
 ## 📌 Stato degli Appunti  
@@ -22,6 +23,8 @@ Per un’esposizione più completa e formale degli argomenti trattati, si consig
 ## 📚 **Indice dei Contenuti**  
 
 ### 1. **Statistica descrittiva**  
+
+
 | Argomento | Stato | 
 |-----------|-------|
 |Frequenze (assoluta, relativa, cumulativa) |✅|
@@ -33,7 +36,8 @@ Per un’esposizione più completa e formale degli argomenti trattati, si consig
 
 ---
 
-### 2. **Grafici**  
+### 2. **Grafici**
+
 | Argomento | Stato | 
 |-----------|-------|
 |Diagramma a barre |✅|
@@ -43,6 +47,8 @@ Per un’esposizione più completa e formale degli argomenti trattati, si consig
 |Box plot|✅|
 |Q-Q Plot|✅|
 |Scatter Plot|✅|  
+
+
 
 ---
 

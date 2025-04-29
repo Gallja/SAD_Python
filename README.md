@@ -24,12 +24,12 @@ Per un’esposizione più completa e formale degli argomenti trattati, si consig
 ### 1. **Statistica descrittiva**  
 | Argomento | Stato | 
 |-----------|-------|
-|Frequenze (assoluta, relativa, cumulativa) |🔧|
-|Indici di centralita: media, mediana, moda |🔧|
-|Indicei di dispersione: varianza, deviazione standard, coefficiente di variazione |🔧|
-|Indici di correlazione: scatter plot, covarianza, indice di correlazione di pearson |🔧|
-| Indici di eterogeneità: indice di Gini per l'eterogeneità, entropia, entropia normalizzata |🔧|
-| Indici di concentrazione: curva di lorentz, indice di Gini per la concentrazione, analisi della varianza (ANOVA) |🔧|
+|Frequenze (assoluta, relativa, cumulativa) |✅|
+|Indici di centralita: media, mediana, moda |✅|
+|Indicei di dispersione: varianza, deviazione standard, coefficiente di variazione |✅|
+|Indici di correlazione: scatter plot, covarianza, indice di correlazione di pearson |✅|
+| Indici di eterogeneità: indice di Gini per l'eterogeneità, entropia, entropia normalizzata |✅|
+| Indici di concentrazione: curva di lorentz, indice di Gini per la concentrazione, analisi della varianza (ANOVA) |✅|
 
 ---
 

@@ -126,6 +126,18 @@ Per un’esposizione più completa e formale degli argomenti trattati, si consig
 
 ---
 
+### 7. **Statistica inferenziale**
+| Argomento | Stato |
+|-----------|-------|
+|Parametri e stimatori|✅|
+|Stimatori non deviati|✅ |
+|Valutazione della bontà di uno stimatore: bias, varianza, scarto quadratico medio|✅ |
+|Consistenza in media quadratica|📝🔧|
+|Legge dei grandi numeri|📝🔧|
+|Taglia minima di un campione|📝🔧|
+
+---
+
 ## 🤝 **Come Contribuire**  
 1. **Segnala errori**: Apri una [issue](https://github.com/Gallja/SAD_Python/issues) con descrizione dettagliata.  
 2. **Proponi migliorie**: Invia una **pull request** con modifiche ben documentate.  

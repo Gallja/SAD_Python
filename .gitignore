@@ -1,8 +1,8 @@
-.venv
+.venv/
 esami/
-.toc*
-.log*
-.idx*
-.aux*
-.gz*
+*.toc
+*.log
+*.idx
+*.aux
+*.gz
 cheatsheet/immagini/

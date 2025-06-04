@@ -1,2 +1,7 @@
 .venv
 esami/
+.toc
+.log
+.idx
+.aux
+.gz

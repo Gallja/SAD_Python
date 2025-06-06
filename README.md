@@ -148,7 +148,7 @@ Per un’esposizione più completa e formale degli argomenti trattati, si consig
 ## **Contributors**
 
 - [Er machine](https://github.com/comitanigiacomo) : autore principale degli appunti
-- [Favo02](https://github.com/Favo02) e [Zaghe](https://github.com/Tsagae) : autori della repository formalizzata, utilizzata come riferimento
+- [Favo02](https://github.com/Favo02), [Luke](https://github.com/LucaCorra02) e [Zaghe](https://github.com/Tsagae) : autori della repository formalizzata, utilizzata come riferimento
 - [gallja](https://github.com/Gallja) : revisione dei contenuti
 - [Aimangiato](https://github.com/aimangiato) : revisione dei contenuti
 

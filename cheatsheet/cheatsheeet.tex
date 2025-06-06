@@ -13,6 +13,8 @@
 \usepackage{caption}
 \usepackage{geometry}
 \geometry{margin=2.5cm}
+\usepackage{booktabs} % Per \toprule, \midrule, \bottomrule nelle tabelle
+\usepackage{array} % Per colonne personalizzate in tabular (@{})
 
 % Definizione di un comando per il "backtick style"
 \newtcbox{\hi}{on line, nobeforeafter, colframe=gray!60, colback=gray!20, 
@@ -97,7 +99,7 @@
         \end{center}
     \end{itemize}
 
-    \item \textbf{Poisson}: $X \sim P(\lambda)$: La variabile assume il numero di eventi che si veriﬁcano in un dato intervallo di tempo, sapendo che mediamente se ne veriﬁcano un numero 𝜆 ∈ (0, +∞). Tutti gli eventi sono indipendenti. \textbf{Discreto}
+    \item \textbf{Poisson}: $X \sim P(\lambda)$: La variabile assume il numero di eventi che si veriﬁcano in un dato intervallo di tempo, sapendo che mediamente se ne veriﬁcano un numero $\lambda \in (0, +\infty)$. Tutti gli eventi sono indipendenti. \textbf{Discreto}
     \begin{itemize}
         \item Massa: $\frac{e^{-\lambda} \lambda^x}{x!} \, \mathbb{I}_{\{0, 1, 2, \dots\}}(x)$
         \item Ripartizione: \textit{NON vista nel corso}
@@ -156,7 +158,32 @@
     \end{itemize}
 \end{itemize}
 
-\section{calcolo combinatorio}
+\begin{center}
+\begin{tabular}{llp{7.5cm}}
+\toprule
+\textbf{Distribuzione} & \textbf{Stabile sotto $Y = aX + b$?} & \textbf{Note} \\
+\midrule
+Bernoulliana           & No    & Il supporto cambia da $\{0,1\}$ a $\{b, a+b\}$; non è più una variabile Bernoulli. \\
+Binomiale              & No    & Non resta binomiale: somma di variabili $aX + b$ non ha struttura binomiale. \\
+Uniforme discreta      & Sì    & Resta uniforme discreta su un nuovo intervallo: traslazione e scalatura del supporto. \\
+Geometrica             & No    & La forma esponenziale viene distrutta dalla trasformazione. \\
+Poisson                & No    & Solo somme di variabili Poisson (con stesso $\lambda$) restano Poisson, ma non con $aX + b$. \\
+Ipergeometrica         & No    & Modifica la struttura combinatoria; non resta ipergeometrica. \\
+Uniforme continua      & Sì    & Resta uniforme continua su un intervallo trasformato: $U(a, b) \rightarrow U(aa + b, ab + b)$. \\
+Esponenziale           & Parzialmente & Moltiplicazione positiva ($a > 0$) cambia solo il parametro $\lambda \rightarrow \lambda/a$, ma aggiunta ($b$) rompe la forma. \\
+Normale (Gaussiana)    & Sì    & Perfettamente stabile: $X \sim \mathcal{N}(\mu, \sigma^2) \Rightarrow aX + b \sim \mathcal{N}(a\mu + b, a^2\sigma^2)$. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\pagebreak
+
+ATTENZIONE ALLA RIPRODUCIBILITÀ: 
+\begin{itemize}
+    \item BINOMIALE: Le variabili devono essere \textbf{Indipendenti}, il parametro $n$ può essere diverso per ogni variabile, ma il parametro $p$ deve essere uguale!
+    \item POISSON: Le variabili devono essere \textbf{Indipendenti}, $X_1 + X_2 \sim P(\lambda_1 + \lambda_2)$. Se le variabili sono anche \textbf{i.i.d.} allora $X_1 + X_2 \sim P(2\lambda)$
+    \item NORMALE: Date le variabili aleatorie $X_1, \dots, X_n$ gaussiane e \textbf{indipendenti}, allora: $Y \sim N(\sum_{i = 1}^{n}\mu_i , \sqrt{\sum_{i=1}^{n}\sigma_i^2})$
+\end{itemize}
 
 \begin{center}
 \includegraphics[width=1\linewidth]{./immagini/schemaCombinatorio.png}
@@ -473,6 +500,13 @@ data['attributo'].std()
     print(df)
 
     freq.plot.pie()
+    plt.show()
+\end{lstlisting}
+
+\subsubsection*{Grafico a barre}
+\begin{lstlisting}
+    first_app_freq = heroes_with_year['First appearance'].value_counts()
+    plt.bar(first_app_freq.index, first_app_freq.values)
     plt.show()
 \end{lstlisting}
 

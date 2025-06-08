@@ -416,8 +416,7 @@ gini2(auto['tipo_motore'])
 \subsection*{Conversione booleana per correlazioni}
 
 \begin{lstlisting}[language=Python]
-accessi['allarme2'] = accessi['allarme'].apply(lambda x: x == 'ON')
-accessi['carico_sistema'].corr(accessi['allarme2'])
+data['convertito'] = data['da_convertire'].apply(lambda x: x == 'ON')
 \end{lstlisting}
 
 \subsection*{Indici Statistici}
@@ -483,13 +482,23 @@ list(data['attributo'].unique())
 data['attributo'].std()
 \end{lstlisting}
 
-\subsubsection*{QQ Plot}
+\subsubsection*{QQ Plot attributo-normale}
 
 \begin{lstlisting}
-  import statsmodels.api as sm
-  mu = data['campo'].mean()
-  std = data['campo'].std()
-  sm.qqplot(data['campo'],dist = st.norm, loc=mu, scale=std, line='45', fit=True)
+    import statsmodels.api as sm
+    mu = data['attributo_1'].mean()
+    sigma = data['attributo_1'].std()
+    sm.qqplot(data['attributo_1'],dist = st.norm, line = '45', loc = mu, scale = sigma)
+    plt.show()  
+\end{lstlisting}
+
+\subsubsection*{QQ Plot tra due attributi }
+
+\begin{lstlisting}
+    import statsmodels.api as sm 
+
+    sm.qqplot_2samples(data['attributo_1'], data['attributo_2'], line = '45')
+    plt.show()
 \end{lstlisting}
 
 \subsubsection*{PiePlot}
@@ -591,6 +600,27 @@ A seconda del risultato $ris$ ottenuto:
     n = len(campione_senza_null)
 \end{lstlisting}
 
+\subsubsection*{Linespace e Arange}
+
+\begin{itemize}
+    \item \textbf{linespace}: np.linespace(start, stop, num), dove num è il numero di punti da generare nell'intervallo specificato
+    \item \textbf{arange}: np.arange(start, stop, step), dove step è l'incremento tra i valori consecutivi (se omesso è uguale a 1)
+\end{itemize}
+
+\subsubsection*{Aggiunta nuovo attributo nel dataset}
+
+\begin{lstlisting}[language=Python]
+    # il nuovo attributo dev'essere chiamato punteggio ed è dato dal doppio delle basse emissioni - carpooling:
+    lista_nuovo_attributo = (2 * auto['basse_emissioni'] - auto['carpooling'].to_numpy())
+
+    auto['punteggio'] = lista_nuovo_attributo
+
+    # stampa del nuovo attributo aggiunto al dataset:
+    auto['punteggio']
+\end{lstlisting}
+
+
+
 \pagebreak
 
 \section{calcolo probabilità}
@@ -620,7 +650,7 @@ Il problema si pone quando la richiesta è di calcolare $P(X \geq 30)$:
   \]
 \end{itemize}
 
-\paragraph{}{Proprietà del valore atteso}
+\subsection*{}{Proprietà del valore atteso}
 
 Posto ad esempio $Z = 2X - Y$:
 
@@ -715,29 +745,6 @@ Ricordo infine che $COV(X, Y) = E[XY] - E[X]E[Y]$
 
 \pagebreak
 
-\subsubsection*{Tracciare la funzione di ripartizione}
-
-\begin{lstlisting}
-    import pandas as pd
-    import scipy.stats as st
-    import numpy as np
-    import matplotlib.pyplot as plt
-
-    h = 4/10
-
-    def f(x):
-        return (1-(1-h)**(np.floor(x)+1))
-
-    x = np.linspace(0, 15)
-    y = [f(n) for n in x]
-
-
-    plt.step(x, y)
-
-    plt.grid(True)
-    plt.show()
-\end{lstlisting}
-
 \subsubsection*{Dimostrare che f è una funzione di densità}
 
 
@@ -821,6 +828,35 @@ $T \sim N (2 \mu, \frac{4 \sigma^2}{n})$
 
 $E[X^2] = \sum_{i}(x_i)^2*p(x_i)$
 
+\pagebreak
+
+\section{Esercizio 3}
+
+\subsubsection*{Grafico empirico della funzione di ripartizione}
+
+\begin{lstlisting}[language=Python]
+    # Estrai e ordina i valori della colonna 'richieste'
+    richieste = accessi['richieste'].sort_values().values
+    n_total = len(richieste)
+
+    # Calcola la CDF empirica (y = frazione cumulativa)
+    y = np.arange(1, n_total + 1) / n_total  # Frazione cumulativa (es. 0.2, 0.4, ..., 1.0)
+
+    # Crea il grafico ECDF
+    plt.step(richieste, y, label = 'ECDF')
+    plt.xlabel('Numero di Richieste')
+    plt.ylabel('Frazione Cumulativa (CDF)')
+    plt.title('Distribuzione Cumulativa delle Richieste')
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Esempio: traccia una linea orizzontale per un f specifico (es. f=95%)
+    f = 95
+    plt.axhline(y = f/100, color='red', linestyle='--', label=f'{f}% dei casi')
+    plt.legend()
+
+    plt.show()
+\end{lstlisting}
+
 \section{Calcolo combinatorio python}
 
 \subsubsection*{utilità}
@@ -845,6 +881,8 @@ $E[X^2] = \sum_{i}(x_i)^2*p(x_i)$
     # disposizioni (o permutazioni in caso k = N) SENZA RIPETIZIONI (ordine conta)
     perm(N, k)
 \end{lstlisting}
+
+\pagebreak
 
 \section*{Appendice statistica}
 

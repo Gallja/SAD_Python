@@ -832,6 +832,39 @@ Consistenza in media quadratica:
     \item $\lim_{n \to \infty}MSE \neq 0$: NON gode della proprietà
 \end{itemize}
 
+\subsection*{Il metodo di Massima Verosimiglianza}
+
+Oltre al metodo plug-in, potrei utilizzare il metodo di massima verosimiglianza nel caso in cui avessi operatori non lineari. \\
+
+Per capire come utilizzarlo correttamente, partiamo da questi assunti:
+
+\begin{itemize}
+    \item $f_X (x) \to$ Funzione di Massa/Densità di Probabilità \textbf{Marginale}.
+    \item $f_X(x_i) = L(p) = \prod_{i=1}^{n} f_X(x_i, p) \to$ Funzione di Massa/Densità di Probabilità \textbf{Congiunta}.
+\end{itemize}
+
+Esempio con Funzione di Massa di Probabilità Marginale della distribuzione Bernoulliana, a partire dalla quale voglio stimare un parametro fissato $p$: \\
+
+La Funzione Marginale è: $f_X(x) = p^x (1-p)^{1-x}$, con $X \in \{0,1\}$ \\
+
+La Funzione Congiunta è invece: $L(p) = \prod_{i=1}^{n} f_X(x_i, p) = p^{\sum_{i=1}^{n}x_i} (1-p)^{n-\sum_{i=1}^{n} x_i}$ \\
+
+A questo punto bisogna utilizzare le proprietà del \textbf{logaritmo naturale} per non avere le sommatorie come esponenti:
+
+$\Rightarrow \ln[L(p)] = ln[p^{\sum_{i=1}^{n}x_i} (1-p)^{n-\sum_{i=1}^{n} x_i}] \Rightarrow$ \\
+$\Rightarrow \ln[p^{\sum_{i=1}^{n}x_i} (1-p)^{n-\sum_{i=1}^{n} x_i}] = \sum_{i=1}^{n} x_i \cdot \ln(p) + (n - \sum_{i=1}^{n} x_i) \ln(1-p) =$ \\
+
+Ora devo:
+\begin{itemize}
+    \item Derivare rispetto al parametro che intendiamo stimare (in questo caso è $p$);
+    \item Uguagliare il tutto a 0 ed isolare il parametro da stimare.
+\end{itemize}
+
+$\Rightarrow \sum_{i=1}^{n} x_i \cdot \frac{1}{p} - (n - \sum_{i=1}^{n} x_i) \frac{1}{1-p} = 0 \Rightarrow$ \\
+$\Rightarrow \sum_{i=1}^{n} \frac{x_i}{p} = \frac{n-\sum_{i=1}^{n} x_i} \Rightarrow$ \\
+$\Rightarrow \frac{\sum_{i=1}^{n} x_i (1-p)}{p(1-p)} = \frac{np - (\sum_{i=1}^{n} x_i)p}{p(1-p)}$ \\
+$\Rightarrow p = \frac{1}{n} \sum_{i=1}^{n} x_i \to$ che è la \textbf{media campionaria} di $X$, per definizione stimatore \textbf{non distorto} per $p$.
+
 \subsection*{Applicare il teorema centrale del limite}
 
 $P(|T - p| \leq \epsilon)$ = $2\Phi(\frac{\epsilon\sqrt{n}}{\sigma}) - 1$

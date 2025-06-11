@@ -320,7 +320,7 @@ plt.show()
 freq = ztl['passaggi'].value_counts()
 plt.plot(freq.index, freq, 'o')
 plt.vlines(freq.index, 0, freq)
-plt.xlim(0, 30)
+# plt.xlim(0, 30)
 plt.show()
   \end{lstlisting}
 \end{itemize}
@@ -372,8 +372,7 @@ auto['numero_occupanti'].value_counts(normalize=True, bins=10).sort_index().cums
 \subsection*{Correlazione}
 
 \begin{lstlisting}[language=Python]
-ztl['abbonamento'].corr(ztl['passaggi'])
-ztl.plot.scatter('abbonamento', 'passaggi')
+plt.scatter(accessi['allarme2'], accessi['carico_sistema'])
 plt.show()
 \end{lstlisting}
 
@@ -501,6 +500,19 @@ data['attributo'].std()
     plt.show()
 \end{lstlisting}
 
+\subsubsection*{QQ Plot attributo-distribuzione qualsiasi discreta}
+
+\begin{lstlisting}
+    import statsmodels .api as sm
+
+    mu = allarme_si_finale.mean()
+
+    sm.qqplot(allarme_si_finale, dist=st.poisson(mu), line='45')
+    plt.show()
+\end{lstlisting}
+
+
+
 \subsubsection*{PiePlot}
 
 \begin{lstlisting}
@@ -514,8 +526,8 @@ data['attributo'].std()
 
 \subsubsection*{Grafico a barre}
 \begin{lstlisting}
-    first_app_freq = heroes_with_year['First appearance'].value_counts()
-    plt.bar(first_app_freq.index, first_app_freq.values)
+    freq_punteggio = data['attributo'].value_counts()
+    plt.bar(freq_punteggio.index, freq_punteggio.values)
     plt.show()
 \end{lstlisting}
 
@@ -531,7 +543,8 @@ In questo caso conviene fare il box plot che posso fare con:
 \subsubsection*{Rimozione degli outlier}
 
 \begin{lstlisting}
-    data = data[data['attributo'] <= data['attributo'].quantile(0.75(guardo boxplot))].reset_index(drop = True)
+    # guardo boxplot
+    data = data[data['attributo'] <= data['attributo'].quantile(0.75)].reset_index(drop = True)
 \end{lstlisting}
 
 \subsubsection*{Correlazione tra due attributi}
@@ -554,8 +567,7 @@ A seconda del risultato $ris$ ottenuto:
 \subsubsection*{ScatterPlot (2 parametri)}
 
 \begin{lstlisting}
-    plt.scatter(heroes['height'], heroes('Weight'))
-    plt.show()
+    data.plot.scatter('attrinbuto_1', 'attributo_2')
 \end{lstlisting}
 
 \subsubsection*{ScatterPlot (3 parametri)}
@@ -617,6 +629,18 @@ A seconda del risultato $ris$ ottenuto:
 
     # stampa del nuovo attributo aggiunto al dataset:
     auto['punteggio']
+\end{lstlisting}
+
+\subsubsection*{individuazione e rimozione valori nulli}
+
+\begin{lstlisting}[language=python]
+    # Prima di tutto verifico che non ci siano valori nulli:
+    print(ztl_giornalieri['categoria'].isnull().sum())
+
+    # Eventualmente per toglierli
+    senza_nulli = ztl_giornalieri.dropna(subset=['categoria'])
+
+    print(senza_nulli['categoria'].isnull().sum())
 \end{lstlisting}
 
 
@@ -770,7 +794,7 @@ La funzione di massa è una funzione $f$ che deve rispettare le seguenti proprie
 \end{itemize}
 \subsection*{Indicate i valori di $a$ e $b$ per i quali $Z$ risulta essere una variabile aleatoria, motivando la vostra risposta}
 
-Una variabile aleatoria è una variabile che ha un valore NON costante.
+Una variabile aleatoria è una quantità il cui valore non può essere predeterminato con certezza ma è soggetto a variazioni casuali, ovvero che ha un valore NON costante.
 
 Nel nostro caso, Z è una variabile aleatoria per ogni $a, b \in R$. Tuttavia, nel caso in cui `a = 0` e `b = 0`, la variabile `Z` assume sempre valore `Z = 0` con probabilità = 1, quindi diventa una variabile aleatoria degenere
 
@@ -824,6 +848,17 @@ Sappiamo però che T = 2* $\overline{X}$, quindi, per le propietà delle trasfor
 
 $T \sim N (2 \mu, \frac{4 \sigma^2}{n})$
 
+\subsection*{I dati a disposizione permettono di garantire, con probabilità maggiore o uguale a 0.99, che la stima fatta nell'Esercizio 5.2 comporti un errore (in valore assoluto) di massimo $\epsilon = 0.1$}
+
+A questo punto devo:
+
+\begin{itemize}
+    \item Calcolare la taglia minima del camoione isolando la n
+    \item Calcolare la taglia del campione effettivo (occhio ad eliminare eventuali valori nulli)
+    \item Confrontare i valori: se il \textbf{Secondo valore} è >= del primo, allora la stima è \textbf{affidabile}
+\end{itemize}
+
+
 \subsection*{Formule Utili}
 
 $E[X^2] = \sum_{i}(x_i)^2*p(x_i)$
@@ -857,6 +892,13 @@ $E[X^2] = \sum_{i}(x_i)^2*p(x_i)$
     plt.show()
 \end{lstlisting}
 
+\subsubsection*{Fissato un generico numero $f$ compreso fra 0 e 100, vogliamo determinare il numero $n$ che rende vera l'affermazione nell'$f$ percento dei casi sono arrivate al massimo $n$ richieste"}
+
+\begin{lstlisting}
+    f = 95
+    richieste = accessi['richieste'].sort_index()
+    richieste.quantile(f/100)
+\end{lstlisting}
 \section{Calcolo combinatorio python}
 
 \subsubsection*{utilità}
